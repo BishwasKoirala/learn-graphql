@@ -45,16 +45,23 @@ export const resolvers = {
       return db.games.find((g) => g.id === parent.game_id);
     },
   },
-  Mutation : {
+  Mutation: {
     deleteGame(_, args) {
-      db.games = db.games.filter((g) => g.id !== args.id)
+      db.games = db.games.filter((g) => g.id !== args.id);
 
-      return db.games
-    }
-  }
-  
+      return db.games;
+    },
+    addGame(_, args) {
+      let game = {
+        ...args.game,
+        id: Math.floor(Math.random() * 1000).toString(),
+      };
+      db.games.push(game);
+      return game;
+    },
+  },
 };
-
+D
 /*
   appolo can filter it by these , dont need to worry here
   games {
